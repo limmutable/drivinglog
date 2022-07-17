@@ -20,8 +20,8 @@ def generateRandom():
 def generateReport():
     # initialization and user inputs
     # Enter start date here and how many days to run
-    startdate = datetime(2022, 1, 1)
-    howmanydays = 10
+    startdate = datetime(2022, 2, 1)
+    howmanydays = 150
 
     # console output
     print("Generating a report from " + startdate.strftime('%Y-%m-%d') + " for " + str(howmanydays) + " days")
