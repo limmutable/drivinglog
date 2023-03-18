@@ -20,8 +20,10 @@ def generateRandom():
 def generateReport():
     # initialization and user inputs
     # Enter start date here and how many days to run
-    startdate = datetime(2022, 2, 1)
-    howmanydays = 150
+    startdate = datetime(2023, 1, 1)
+    #enddate = datetime(2023, 6, 30)
+    howmanydays = 180
+    #print(howmanydays)
 
     # console output
     print("Generating a report from " + startdate.strftime('%Y-%m-%d') + " for " + str(howmanydays) + " days")
@@ -42,8 +44,8 @@ def generateReport():
             # print("writing " + d.strftime('%Y-%m-%d'))
 
             # base work-home route = 24km, then add some extra random distance
-            entry1 = [d.strftime('%Y-%m-%d'), 'Home', 'Work', str(24+generateRandom())]
-            entry2 = [d.strftime('%Y-%m-%d'), 'Work', 'Home', str(24+generateRandom())]
+            entry1 = [d.strftime('%Y-%m-%d'), 'Home', 'Work', str(26+generateRandom())]
+            entry2 = [d.strftime('%Y-%m-%d'), 'Work', 'Home', str(26+generateRandom())]
             # write the data from Home to Work
             writer.writerow(entry1)
             # write the data from Work to Home
