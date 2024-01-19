@@ -1,33 +1,64 @@
 # import modules used here -- sys is a very standard one
 import sys
 import random
-from datetime import datetime
+import datetime
 from datetime import timedelta
+import holidays
 import csv
-
-def generateRandom():
-        a = random.random()
-        # generate a random integer between 0 - 3
-        #print(a)
-        #print(int(a*4))
-        return (int(a*4))
-
 
 # Generating a driving record file (csv format)
 # Date (YYYY-MM-DD), From, To, Distance
-# Example of a raw: "2022-07-24, 집, 회사, 24"
+# Example of a raw: "2022-07-24, Home, Office, 24"
 
 def generateReport():
     # initialization and user inputs
-    # Enter start date here and how many days to run
-    startdate = datetime(2023, 1, 1)
-    #enddate = datetime(2023, 6, 30)
-    howmanydays = 180
-    #print(howmanydays)
-
+    # Define the date range (December 1st to December 31st, 2023)
+    start_date = datetime.date(2023, 1, 1)
+    end_date = datetime.date(2023, 12, 31)
     # console output
-    print("Generating a report from " + startdate.strftime('%Y-%m-%d') + " for " + str(howmanydays) + " days")
+    print("Generating a report from " + start_date.strftime('%Y-%m-%d') + " to " + end_date.strftime('%Y-%m-%d') + ".")
+
+    # Initialize the list of US national holidays
+    kr_holidays = holidays.KR()
+    #us_holidays = UnitedStates(years=[2023])
     
+    # Define the typical commute distance and error percentage
+    typical_distance = 28  # km
+    error_percentage = 0.20  # allow 20% error
+
+    # Generate the driving log
+    driving_log = []
+
+    current_date = start_date
+    while current_date <= end_date:
+         # Check if the current date is a weekday (Monday to Friday) and not a holiday
+        if current_date.weekday() < 5 and current_date not in kr_holidays:
+            # Calculate the actual distance with random error
+            actual_distance1 = typical_distance * (1 + random.uniform(-error_percentage, error_percentage))
+            # Add the log entry
+            log_entry1 = {
+            "Date": current_date.strftime("%Y-%m-%d"),
+            "Departure": "Home",
+            "Destination": "Office",
+            "Distance Driven": round(actual_distance1, 2),
+            }
+            driving_log.append(log_entry1)
+            
+            actual_distance2 = typical_distance * (1 + random.uniform(-error_percentage, error_percentage))
+            # Add the log entry
+            log_entry2 = {
+            "Date": current_date.strftime("%Y-%m-%d"),
+            "Departure": "Office",
+            "Destination": "Home",
+            "Distance Driven": round(actual_distance2, 2),
+            }
+            driving_log.append(log_entry2)
+        # Move to the next day
+        current_date += datetime.timedelta(days=1)
+
+    # Print the driving log
+    for entry in driving_log:
+        print(f"Date: {entry['Date']}, Departure: {entry['Departure']}, Destination: {entry['Destination']}, Distance Driven: {entry['Distance Driven']} km")
  
     with open('output.csv', 'w', encoding='UTF8') as f:
         writer = csv.writer(f)
@@ -36,24 +67,12 @@ def generateReport():
         header = ['Date', 'From', 'To', 'Distance']
         # write the header
         writer.writerow(header)
-
-        day = 0
-        d = startdate
-
-        for day in range(howmanydays):
-            # print("writing " + d.strftime('%Y-%m-%d'))
-
-            # base work-home route = 24km, then add some extra random distance
-            entry1 = [d.strftime('%Y-%m-%d'), 'Home', 'Work', str(26+generateRandom())]
-            entry2 = [d.strftime('%Y-%m-%d'), 'Work', 'Home', str(26+generateRandom())]
+        for entry in driving_log:
+            line = [entry['Date'], entry['Departure'], entry['Destination'], entry['Distance Driven']]
             # write the data from Home to Work
-            writer.writerow(entry1)
-            # write the data from Work to Home
-            writer.writerow(entry2)
-
-            d = d + timedelta(days = 1)
-            day = day + 1
-
+            writer.writerow(line)
+    print("saved the output in output.csv")
+            
 # Gather our code in a main() function
 def main():
     generateReport()
