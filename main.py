@@ -5,16 +5,25 @@ import datetime
 from datetime import timedelta
 import holidays
 import csv
+from dateutil.parser import parse
 
 # Generating a driving record file (csv format)
 # Date (YYYY-MM-DD), From, To, Distance
 # Example of a raw: "2022-07-24, Home, Office, 24"
 
+def get_date_from_user(prompt):
+    while True:
+        date_str = input(prompt)
+        try:
+            return parse(date_str).date()
+        except ValueError:
+            print("Invalid date format. Please try again.")
+
 def generateReport():
     # initialization and user inputs
     # Define the date range (December 1st to December 31st, 2023)
-    start_date = datetime.date(2023, 1, 1)
-    end_date = datetime.date(2023, 12, 31)
+    start_date = get_date_from_user("Enter the start date: ")
+    end_date = get_date_from_user("Enter the end date: ")
     # console output
     print("Generating a report from " + start_date.strftime('%Y-%m-%d') + " to " + end_date.strftime('%Y-%m-%d') + ".")
 
