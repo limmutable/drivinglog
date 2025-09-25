@@ -11,9 +11,13 @@ from dateutil.parser import parse
 # Date (YYYY-MM-DD), From, To, Distance
 # Example of a raw: "2022-07-24, Home, Office, 24"
 
-def get_date_from_user(prompt):
+def get_date_from_user(prompt, default_date=None):
+    # If user just presses enter, use the default date
     while True:
-        date_str = input(prompt)
+        default_str = f" [{default_date.strftime('%Y-%m-%d')}]" if default_date else ""
+        date_str = input(f"{prompt}{default_str}: ")
+        if date_str == "" and default_date:
+            return default_date
         try:
             return parse(date_str).date()
         except ValueError:
@@ -21,9 +25,13 @@ def get_date_from_user(prompt):
 
 def generateReport():
     # initialization and user inputs
-    # Define the date range (December 1st to December 31st, 2023)
-    start_date = get_date_from_user("Enter the start date: ")
-    end_date = get_date_from_user("Enter the end date: ")
+    # Define default date range
+    default_start_date = datetime.date(2025, 1, 1)
+    default_end_date = datetime.date(2025, 6, 30)
+    
+    # Get user input with defaults
+    start_date = get_date_from_user("Enter the start date", default_start_date)
+    end_date = get_date_from_user("Enter the end date", default_end_date)
     # console output
     print("Generating a report from " + start_date.strftime('%Y-%m-%d') + " to " + end_date.strftime('%Y-%m-%d') + ".")
 
@@ -32,7 +40,7 @@ def generateReport():
     #us_holidays = UnitedStates(years=[2023])
     
     # Define the typical commute distance and error percentage
-    typical_distance = 28  # km
+    typical_distance = 24  # km
     error_percentage = 0.20  # allow 20% error
 
     # Generate the driving log
