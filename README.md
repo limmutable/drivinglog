@@ -4,8 +4,7 @@ This script generates a simulated driving log in CSV format. It creates a record
 
 ## Features
 
-- **Custom Date Range**: Specify the exact start and end dates for the report interactively.
-- **Flexible Date Input**: Accepts various date formats (e.g., "2023-01-01", "Jan 1, 2023", "01/01/2023").
+- **Custom Date Range**: Specify the exact start and end dates for the report using command-line arguments.
 - **Holiday Exclusion**: Automatically skips log entries for public holidays in South Korea.
 - **Realistic Data**: Simulates slight, random variations in daily commute distances to appear more realistic.
 - **CSV Output**: Saves the final report to an `output.csv` file for easy use in spreadsheets or data analysis tools.
@@ -27,14 +26,27 @@ Before running the script, you need to have Python 3 and the following Python li
 
 ## How to Run
 
-1.  Execute the script from your command line:
-    ```bash
-    python main.py
-    ```
-2.  When prompted, enter the desired start date for the log and press Enter.
-3.  Next, enter the end date and press Enter.
+Execute the script from your command line, providing the start and end dates as arguments:
+```bash
+python main.py --start YYYY-MM-DD --end YYYY-MM-DD
+```
+
+For example:
+```bash
+python main.py --start 2025-01-01 --end 2025-06-30
+```
 
 The script will process the information and generate an `output.csv` file in the same directory.
+
+## Configuration
+
+You can customize the script's behavior by editing the `config.json` file. The following parameters are available:
+
+- `typical_distance`: The average distance of a one-way commute in kilometers.
+- `error_percentage`: The maximum random variation to apply to the distance (e.g., 0.20 for 20%).
+- `home_location`: The name of the starting location for the morning commute.
+- `office_location`: The name of the destination for the morning commute.
+- `holiday_country`: The two-letter country code for which to exclude public holidays (e.g., "KR" for South Korea, "US" for the United States).
 
 ## Output File
 
