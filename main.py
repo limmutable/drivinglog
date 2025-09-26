@@ -72,13 +72,13 @@ def generate_report(start_date, end_date):
 
 def main():
     parser = argparse.ArgumentParser(description='Generate a driving log.')
-    parser.add_argument('--start', required=True, help='The start date in YYYY-MM-DD format.')
-    parser.add_argument('--end', required=True, help='The end date in YYYY-MM-DD format.')
+    parser.add_argument('--from', required=True, help='The start date for the report (e.g., YYYY-MM-DD).')
+    parser.add_argument('--to', required=True, help='The end date for the report (e.g., YYYY-MM-DD).')
     args = parser.parse_args()
 
     try:
-        start_date = parse(args.start).date()
-        end_date = parse(args.end).date()
+        start_date = parse(getattr(args, 'from')).date()
+        end_date = parse(args.to).date()
     except ValueError:
         print("Invalid date format. Please use YYYY-MM-DD.")
         sys.exit(1)

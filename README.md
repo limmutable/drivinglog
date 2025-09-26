@@ -28,12 +28,12 @@ Before running the script, you need to have Python 3 and the following Python li
 
 Execute the script from your command line, providing the start and end dates as arguments:
 ```bash
-python main.py --start YYYY-MM-DD --end YYYY-MM-DD
+python main.py --from YYYY-MM-DD --to YYYY-MM-DD
 ```
 
 For example:
 ```bash
-python main.py --start 2025-01-01 --end 2025-06-30
+python main.py --from 2025-01-01 --to 2025-06-30
 ```
 
 The script will process the information and generate an `output.csv` file in the same directory.
