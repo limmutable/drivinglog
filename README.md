@@ -1,12 +1,12 @@
 # Driving Log Generator
 
-This script generates a simulated driving log in CSV format. It creates a record of daily commutes by prompting the user for a start and end date, calculating distances for weekdays while excluding public holidays.
+This script generates a **simulated** driving log in CSV format with **fictional data**. It does NOT record actual distances driven. Instead, it creates synthetic records of daily commutes using randomly generated numbers based on a normal distribution centered around user-configured default values. The tool produces these fictional entries for weekdays within a specified date range, automatically excluding public holidays.
 
 ## Features
 
 - **Custom Date Range**: Specify the exact start and end dates for the report using command-line arguments.
 - **Holiday Exclusion**: Automatically skips log entries for public holidays in South Korea.
-- **Realistic Data**: Simulates slight, random variations in daily commute distances to appear more realistic.
+- **Synthetic Data Generation**: Uses a normal distribution to generate random, fictional distances centered around the user-configured default values (not actual driving data).
 - **CSV Output**: Saves the final report to an `output.csv` file for easy use in spreadsheets or data analysis tools.
 
 ## Prerequisites
