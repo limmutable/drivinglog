@@ -1,0 +1,2 @@
+holidays==0.62
+python-dateutil==2.9.0
