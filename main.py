@@ -48,14 +48,16 @@ def generate_log_entries(start_date, end_date, config):
     return driving_log
 
 def write_csv(driving_log):
-    """Writes the driving log to output.csv."""
-    with open('output.csv', 'w', encoding='UTF8', newline='') as f:
+    """Writes the driving log to a CSV file with a timestamp."""
+    timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+    filename = f"output-{timestamp}.csv"
+    with open(filename, 'w', encoding='UTF8', newline='') as f:
         writer = csv.writer(f)
         header = ['Date', 'From', 'To', 'Distance']
         writer.writerow(header)
         for entry in driving_log:
             writer.writerow([entry['Date'], entry['Departure'], entry['Destination'], entry['Distance Driven']])
-    print("Saved the output in output.csv")
+    print(f"Saved the output in {filename}")
 
 def print_log(driving_log):
     """Prints the driving log to the console."""
