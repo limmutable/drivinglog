@@ -18,11 +18,24 @@ Before running the script, you need to have Python 3 and the following Python li
 
 ## Installation
 
-1.  Ensure you have Python 3 installed on your system.
-2.  Install the necessary libraries using pip:
-    ```bash
-    pip install python-dateutil holidays
-    ```
+### 1. Create and activate virtual environment (recommended)
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 2. Install dependencies
+
+Install the necessary libraries using pip:
+```bash
+pip install -r requirements.txt
+```
+
+Alternatively, install manually:
+```bash
+pip install python-dateutil holidays
+```
 
 ## How to Run
 
@@ -65,4 +78,25 @@ Date,From,To,Distance
 2024-03-04,Office,Home,32.89
 2024-03-05,Home,Office,25.82
 2024-03-05,Office,Home,23.86
+```
+
+## Deactivate Virtual Environment
+
+When you're done working on the project:
+
+```bash
+deactivate
+```
+
+## Project Structure
+
+```
+drivinglog/
+├── main.py              # Main script
+├── config.json          # Configuration file
+├── requirements.txt     # Python dependencies
+├── README.md            # This file
+├── .gitignore           # Git ignore rules
+├── venv/                # Virtual environment (not tracked in git)
+└── output-*.csv         # Generated output files (not tracked in git)
 ```
